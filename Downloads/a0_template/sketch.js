@@ -1,13 +1,18 @@
 let lastMinute = -1;
 let mountainX = 0;
 let mountainY;
-let scaleFactor = 2; // Adjust this value to change the scale of the mountains
+let scaleFactor = 2;
+let snowflakes = [];
 
 // setup() is called once at page-load
 function setup() {
+  mountain = loadImage("mountains.jpg", imageLoaded);
+  console.log("LOADED");
   createCanvas(1000, 600); // make an HTML canvas element width x height pixels
   mountainY = height; // Set the initial Y position for the mountains
   mountainX = width; // Set the initial X position for the mountains
+  background(mountain);
+  noStroke();
 }
 
 // draw() is called 60 times per second
@@ -18,7 +23,8 @@ function draw() {
 
   // Check if a new minute has started
   if (min !== lastMinute) {
-    background(229, 249, 253); // Clear the canvas at the beginning of a new minute
+    //background(229, 249, 253); // Clear the canvas at the beginning of a new minute
+    background(mountain);
     lastMinute = min;
     mountainX = 0; // Reset the X position for the mountains
     mountainY = height; // Reset the Y position for the mountains
@@ -127,4 +133,9 @@ function draw() {
 function drawMountain(x, y, width, height, mountainColor) {
   fill(mountainColor);
   triangle(x - width / 2, y, x + width / 2, y, x, y - height);
+  triangle(x - width / 2, y, x + width / 2, y, x, y - height);
+}
+
+function imageLoaded() {
+  console.log("Image loaded successfully!");
 }
